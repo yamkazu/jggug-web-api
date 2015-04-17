@@ -12,6 +12,7 @@ import org.grails.web.json.PrettyPrintJSONWriter
 class MyJson extends JSON {
 
     String key
+    Map paging
 
     MyJson() {
     }
@@ -28,6 +29,10 @@ class MyJson extends JSON {
                 writer.object()
                 writer.key(key)
                 value(target)
+                if (paging) {
+                    writer.key('paging')
+                    value(paging)
+                }
                 writer.endObject()
             } else {
                 value(target)

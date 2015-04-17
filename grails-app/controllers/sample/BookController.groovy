@@ -13,7 +13,12 @@ class BookController extends RestfulController<Book> {
     @Override
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond listAllResources(params), detail: detail
+        def paging = [
+            'total-count'   : countResources(),
+            'current-max'   : params.max,
+            'current-offset': params.int('offset', 0)
+        ]
+        respond listAllResources(params), detail: detail, paging: paging
     }
 
     @Override

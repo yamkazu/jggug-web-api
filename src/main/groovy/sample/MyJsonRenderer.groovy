@@ -18,6 +18,7 @@ class MyJsonRenderer<T> extends DefaultJsonRenderer<T> {
         JSON.use(detail) {
             def converter = object as MyJson
             converter.key = key
+            converter.paging = context.arguments.paging as Map
             renderJson(converter, context)
         }
     }

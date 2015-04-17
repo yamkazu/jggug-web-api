@@ -5,5 +5,7 @@ import sample.MyJsonRenderer
 // Place your Spring DSL code here
 beans = {
     bookRenderer(MyJsonRenderer, Book)
-    booksRenderer(MyJsonCollectionRenderer, Book)
+    booksRenderer(MyJsonCollectionRenderer, Book) {
+        key = 'books'
+    }
 }

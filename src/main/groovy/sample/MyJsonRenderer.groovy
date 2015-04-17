@@ -6,6 +6,8 @@ import org.grails.plugins.web.rest.render.json.DefaultJsonRenderer
 
 class MyJsonRenderer<T> extends DefaultJsonRenderer<T> {
 
+    String key
+
     MyJsonRenderer(Class<T> targetType) {
         super(targetType)
     }
@@ -14,7 +16,9 @@ class MyJsonRenderer<T> extends DefaultJsonRenderer<T> {
     protected void renderJson(T object, RenderContext context) {
         def detail = context.arguments.detail ?: 'short'
         JSON.use(detail) {
-            renderJson(object as JSON, context)
+            def converter = object as MyJson
+            converter.key = key
+            renderJson(converter, context)
         }
     }
 }

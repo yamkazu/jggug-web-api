@@ -5,9 +5,11 @@ class BootStrap {
 
     def init = { servletContext ->
         JSON.registerObjectMarshaller(Book) { Book book, JSON converter ->
+            def includes = converter.getIncludes(Book) ?: ['id', 'title']
             converter.build {
-                id book.id
-                title book.title
+                includes.each {
+                    "$it" book."$it"
+                }
             }
         }
 

@@ -9,4 +9,13 @@ class BookController extends RestfulController<Book> {
     BookController() {
         super(Book)
     }
+
+    @Override
+    def show() {
+        respond queryForResource(params.id), includes: includeFields
+    }
+
+    private List<String> getIncludeFields() {
+        params.fields?.split(',') as List<String> ?: Collections.emptyList()
+    }
 }

@@ -11,11 +11,17 @@ class BookController extends RestfulController<Book> {
     }
 
     @Override
-    def show() {
-        respond queryForResource(params.id), includes: includeFields
+    def index(Integer max) {
+        params.max = Math.min(max ?: 10, 100)
+        respond listAllResources(params), detail: detail
     }
 
-    private List<String> getIncludeFields() {
-        params.fields?.split(',') as List<String> ?: Collections.emptyList()
+    @Override
+    def show() {
+        respond queryForResource(params.id), detail: detail
+    }
+
+    private String getDetail() {
+        params.detail
     }
 }

@@ -1,8 +1,11 @@
-package sample
+package sample.v2
 
 import grails.rest.RestfulController
+import sample.Book
 
 class BookController extends RestfulController<Book> {
+
+    static String namespace = 'v2'
 
     static List<String> responseFormats = ['json', 'xml']
 

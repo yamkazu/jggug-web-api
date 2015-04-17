@@ -7,7 +7,8 @@ class UrlMappings {
             }
         }
 
-        '/books'(resources: 'book')
+        '/v1/books'(resources: 'book', namespace: 'v1')
+        '/v2/books'(resources: 'book', namespace: 'v2')
 
         "/"(view:"/index")
         "500"(view:'/error')
